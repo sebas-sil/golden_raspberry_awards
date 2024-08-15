@@ -61,7 +61,7 @@ git clone git@github.com:sebas-sil/golden_raspberry_awards.git
 ```
 3. teste a aplicação:
 ```shell
-curl -v localhost:8080/films    
+curl -v localhost:8080/films | json_pp
 ```
 
 Como resultado terá a listagem dos filmes carregados no init
@@ -70,19 +70,55 @@ Como resultado terá a listagem dos filmes carregados no init
 * Host localhost:8080 was resolved.
 * IPv6: ::1
 * IPv4: 127.0.0.1
-*   Trying [::1]:8080...
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying [::1]:8080...
 * Connected to localhost (::1) port 8080
 > GET /films HTTP/1.1
 > Host: localhost:8080
-> User-Agent: curl/8.6.0
+> User-Agent: curl/8.7.1
 > Accept: */*
 > 
+* Request completely sent off
 < HTTP/1.1 200 
 < Content-Type: application/json
 < Transfer-Encoding: chunked
-< Date: Wed, 14 Aug 2024 19:24:59 GMT
+< Date: Thu, 15 Aug 2024 19:27:35 GMT
 < 
-* Leftovers after chunking: 5 bytes
+{ [390 bytes data]
+100   383    0   383    0     0  59518      0 --:--:-- --:--:-- --:--:-- 63833
 * Connection #0 to host localhost left intact
-[{"id":1,"year":1980,"title":"Can't Stop the Music","studios":"Associated Film Distribution","producers":"Allan Carr","winner":true},{"id":2,"year":1980,"title":"Cruising","studios":"Lorimar Productions, United Artists","producers":"Jerry Weintraub","winner":false},{"id":3,"year":1980,"title":"The Formula, MGM","studios":"United Artists","producers":"Steve Shagan","winner":false}]
+[
+   {
+      "id" : 1,
+      "producers" : "Allan Carr",
+      "studios" : "Associated Film Distribution",
+      "title" : "Can't Stop the Music",
+      "winner" : true,
+      "year" : 1980
+   },
+   {
+      "id" : 2,
+      "producers" : "Jerry Weintraub",
+      "studios" : "Lorimar Productions, United Artists",
+      "title" : "Cruising",
+      "winner" : false,
+      "year" : 1980
+   },
+   {
+      "id" : 3,
+      "producers" : "Steve Shagan",
+      "studios" : "United Artists",
+      "title" : "The Formula, MGM",
+      "winner" : false,
+      "year" : 1980
+   }
+]
 ```
+
+## controle de tempo
+
+| data | inicio | fim | qtd min | obs |
+| ---- | ------ | --- | ------- | --- |
+| 2024-08-14 | 15:20 | 16:40 | 80min | Esqueleto da aplicação com das classes principais e teste manual |
+| 2024-08-15 | 16:00 | 17:40 | 100min | Carregar banco com arquivo CSV |

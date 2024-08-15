@@ -3,9 +3,11 @@ package br.com.corcunda.golden_raspberry_awards.film;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping(value = "/films")
 public class FilmController {
 
     private final FilmRepository repository;
@@ -16,7 +18,7 @@ public class FilmController {
 
     // Aggregate root
     // tag::get-aggregate-root[]
-    @GetMapping("/films")
+    @GetMapping("")
     List<Film> all() {
         return repository.findAll();
     }
