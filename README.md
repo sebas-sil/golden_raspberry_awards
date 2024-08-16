@@ -83,37 +83,35 @@ Como resultado terá a listagem dos filmes carregados no init
 < HTTP/1.1 200 
 < Content-Type: application/json
 < Transfer-Encoding: chunked
-< Date: Thu, 15 Aug 2024 19:27:35 GMT
+< Date: Fri, 16 Aug 2024 21:58:30 GMT
 < 
-{ [390 bytes data]
-100   383    0   383    0     0  59518      0 --:--:-- --:--:-- --:--:-- 63833
+{ [270 bytes data]
+100   263    0   263    0     0   2146      0 --:--:-- --:--:-- --:--:--  2155
 * Connection #0 to host localhost left intact
-[
-   {
-      "id" : 1,
-      "producers" : "Allan Carr",
-      "studios" : "Associated Film Distribution",
-      "title" : "Can't Stop the Music",
-      "winner" : true,
-      "year" : 1980
-   },
-   {
-      "id" : 2,
-      "producers" : "Jerry Weintraub",
-      "studios" : "Lorimar Productions, United Artists",
-      "title" : "Cruising",
-      "winner" : false,
-      "year" : 1980
-   },
-   {
-      "id" : 3,
-      "producers" : "Steve Shagan",
-      "studios" : "United Artists",
-      "title" : "The Formula, MGM",
-      "winner" : false,
-      "year" : 1980
-   }
-]
+{
+   "max" : [
+      {
+         "followingWin" : 2015,
+         "interval" : 13,
+         "previousWin" : 2002,
+         "producer" : "Matthew Vaughn"
+      },
+      {
+         "followingWin" : 1995,
+         "interval" : 13,
+         "previousWin" : 1982,
+         "producer" : "Mitsuharu Ishii"
+      }
+   ],
+   "min" : [
+      {
+         "followingWin" : 1991,
+         "interval" : 1,
+         "previousWin" : 1990,
+         "producer" : "Joel Silver"
+      }
+   ]
+}
 ```
 
 ## controle de tempo
@@ -124,3 +122,6 @@ Como resultado terá a listagem dos filmes carregados no init
 | 2024-08-15 | 16:00 | 17:40 | 100min | Carregar banco com arquivo CSV (job seria melhor que CommandLineRunner!) |
 | 2024-08-16 | 17:00 | 18:00 | 60min | Normilize database |
 | 2024-08-16 | 18:00 | 19:00 | 60min | Queries |
+| 2024-08-16 | 20:00 | 20:45 | 45min | Testes |
+
+total: 5h 45min

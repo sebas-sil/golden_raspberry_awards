@@ -1,6 +1,5 @@
 package br.com.corcunda.golden_raspberry_awards.film;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
