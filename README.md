@@ -1,6 +1,6 @@
 # Golden Raspberry Awards
 
-Este é um repositório teste para uma entrevista na git. O objetivo é construir uma API Restfull para listar os indicados e vencedores do premio Framboesa de Ouro na categoria pior filme.
+Este é um repositório teste para uma entrevista na Outsera. O objetivo é construir uma API Restfull para listar os indicados e vencedores do premio Framboesa de Ouro na categoria pior filme.
 
 A saída será um JSON mostrando o(s) produtor com o maior intervalo entre um premio e outro e o de menor intervalo:
 
@@ -121,4 +121,6 @@ Como resultado terá a listagem dos filmes carregados no init
 | data | inicio | fim | qtd min | obs |
 | ---- | ------ | --- | ------- | --- |
 | 2024-08-14 | 15:20 | 16:40 | 80min | Esqueleto da aplicação com das classes principais e teste manual |
-| 2024-08-15 | 16:00 | 17:40 | 100min | Carregar banco com arquivo CSV |
+| 2024-08-15 | 16:00 | 17:40 | 100min | Carregar banco com arquivo CSV (job seria melhor que CommandLineRunner!) |
+| 2024-08-16 | 17:00 | 18:00 | 60min | Normilize database |
+| 2024-08-16 | 18:00 | 19:00 | 60min | Queries |

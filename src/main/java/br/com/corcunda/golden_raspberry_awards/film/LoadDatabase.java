@@ -1,6 +1,9 @@
-package br.com.corcunda.golden_raspberry_awards;
+package br.com.corcunda.golden_raspberry_awards.film;
 
 import java.net.MalformedURLException;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Arrays;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,30 +14,19 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.PathResource;
-
-import br.com.corcunda.golden_raspberry_awards.film.Film;
-import br.com.corcunda.golden_raspberry_awards.film.FilmRepository;
+import org.springframework.util.StringUtils;
 
 @Configuration
 class LoadDatabase {
 
-  private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(LoadDatabase.class);
 
   @Bean
   CommandLineRunner initDatabase(FilmRepository repository) {
 
     return args -> {
-      // log.info("Preloading " + repository.save(Film.builder()
-      // .year(1980).title("Can't Stop the Music")
-      // .studios("Associated Film Distribution").producers("Allan
-      // Carr").winner(true).build()));
-      // log.info("Preloading " + repository.save(Film.builder()
-      // .year(1980).title("Cruising").studios("Lorimar Productions, United Artists")
-      // .producers("Jerry Weintraub").winner(false).build()));
-      // log.info("Preloading " + repository.save(Film.builder()
-      // .year(1980).title("The Formula")
-      // .studios("MGM, United Artists").producers("Steve
-      // Shagan").winner(false).build()));
+      Instant start = Instant.now();
+      LOGGER.info("start database loader");
       FlatFileItemReader<Film> reader = readCSV();
       reader.open(new ExecutionContext());
       Film film = null;
@@ -42,6 +34,10 @@ class LoadDatabase {
       while ((film = reader.read()) != null) {
         repository.save(film);
       }
+      long qtd = repository.count();
+      Instant end = Instant.now();
+      long time = Duration.between(start, end).toMillis();
+      LOGGER.info("end database loader with {} records in {} ms", qtd, time);
     };
   }
 
@@ -56,9 +52,9 @@ class LoadDatabase {
         .fieldSetMapper(fieldSet -> Film.builder()
             .year(fieldSet.readInt("year"))
             .title(fieldSet.readString("title"))
-            .studios(fieldSet.readString("studios"))
-            .producers(fieldSet.readString("producers"))
-            .winner(fieldSet.readBoolean("winner"))
+            .studios(Arrays.asList(fieldSet.readString("studios").split("(?i),| and ")).stream().map(x -> StringUtils.capitalize(x.strip())).filter(x -> ! x.isEmpty()).toList())
+            .producers(Arrays.asList(fieldSet.readString("producers").split("(?i),| and ")).stream().map(x -> StringUtils.capitalize(x.strip())).filter(x -> ! x.isEmpty()).toList())
+            .winner(fieldSet.readString("winner").equalsIgnoreCase("yes"))
             .build())
         .build();
   }

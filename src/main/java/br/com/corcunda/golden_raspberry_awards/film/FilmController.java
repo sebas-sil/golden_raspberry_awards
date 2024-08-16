@@ -1,5 +1,6 @@
 package br.com.corcunda.golden_raspberry_awards.film;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,17 +11,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/films")
 public class FilmController {
 
-    private final FilmRepository repository;
+    private final FilmService service;
 
-    FilmController(FilmRepository repository) {
-        this.repository = repository;
+    FilmController(FilmService service) {
+        this.service = service;
     }
 
-    // Aggregate root
-    // tag::get-aggregate-root[]
     @GetMapping("")
-    List<Film> all() {
-        return repository.findAll();
+    IresponseWinnerInterval getWinnerProducers() {
+        return new IresponseWinnerInterval() {
+
+            @Override
+            public List<IReportByProducer> getMax() {
+                return service.getMaxWinnersProducers();
+            }
+
+            @Override
+            public List<IReportByProducer> getMin() {
+                return service.getMinWinnersProducers();
+            }
+        };
     }
-    // end::get-aggregate-root[]
 }
