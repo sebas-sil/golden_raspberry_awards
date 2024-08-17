@@ -57,7 +57,22 @@ git clone git@github.com:sebas-sil/golden_raspberry_awards.git
 ```
 2. execute o maven:
 ```shell
-/mvnw clean spring-boot:run
+./mvnw clean spring-boot:run -Dspring-boot.run.arguments="--dbfile_path=/downloads/movielist.csv"
+```
+Como resultado será visto os logs do spring na saída default. Caso algum erro no carregamento do arquivo, também será mostrado (como exemplo abaixo)
+```shell
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.2)
+
+2024-08-17T13:08:49.202-03:00 ERROR 33943 --- [golden raspberry awards] [           main] b.c.c.g.film.LoadDatabase                : Invalid Line at 3 with error: Unparseable number: invalid year
 ```
 3. teste a aplicação:
 ```shell
@@ -123,5 +138,7 @@ Como resultado terá a listagem dos filmes carregados no init
 | 2024-08-16 | 17:00 | 18:00 | 60min | Normilize database |
 | 2024-08-16 | 18:00 | 19:00 | 60min | Queries |
 | 2024-08-16 | 20:00 | 20:45 | 45min | Testes |
+| 2024-08-17 | 07:30 | 8:30 | 60min | Parametrização do arquivo de banco e testes de arquivo inválido |
+| 2024-08-17 | 12:30 | 13:00 | 30min | Parametrização por linha de comando |
 
-total: 5h 45min
+total: 7h 15min

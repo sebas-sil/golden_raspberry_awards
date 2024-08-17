@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "dbfile_path",
+  "type": "java.lang.String",
+  "description": "path to the CSV used to fill database"
+}]}

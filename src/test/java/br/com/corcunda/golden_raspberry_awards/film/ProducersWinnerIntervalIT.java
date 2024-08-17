@@ -15,8 +15,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.hasItem;
-
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -34,19 +32,19 @@ class ProducersWinnerIntervalIT {
     @Test
     void givenFilmRoot_WhenMockMvc_ThenGetJsonResult() throws Exception {
         this.mock.perform(get("/films")).andDo(print())
-                                                    .andExpect(status().isOk())
-                                                    .andExpect(jsonPath("$.min").exists())
-                                                    .andExpect(jsonPath("$.min[*].producer").value(hasSize(1)))
-                                                    .andExpect(jsonPath("$.min[0].producer").value("Joel Silver"))
-                                                    .andExpect(jsonPath("$.min[0].followingWin").value(1991))
-                                                    .andExpect(jsonPath("$.min[0].previousWin").value(1990))
-                                                    .andExpect(jsonPath("$.min[0].interval").value(1))
-                                                    .andExpect(jsonPath("$.max").exists())
-                                                    .andExpect(jsonPath("$.max[*].producer").value(hasSize(2)))
-                                                    .andExpect(jsonPath("$.max[*].producer").value(hasItems("Matthew Vaughn", "Mitsuharu Ishii")))
-                                                    .andExpect(jsonPath("$.max[*].followingWin").value(hasItems(2015, 1995)))
-                                                    .andExpect(jsonPath("$.max[*].previousWin").value(hasItems(2002, 1982)))
-                                                    .andExpect(jsonPath("$.max[*].interval").value(hasItems(13, 13)));
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.min").exists())
+                .andExpect(jsonPath("$.min[*].producer").value(hasSize(1)))
+                .andExpect(jsonPath("$.min[0].producer").value("Joel Silver"))
+                .andExpect(jsonPath("$.min[0].followingWin").value(1991))
+                .andExpect(jsonPath("$.min[0].previousWin").value(1990))
+                .andExpect(jsonPath("$.min[0].interval").value(1))
+                .andExpect(jsonPath("$.max").exists())
+                .andExpect(jsonPath("$.max[*].producer").value(hasSize(2)))
+                .andExpect(jsonPath("$.max[*].producer").value(hasItems("Matthew Vaughn", "Mitsuharu Ishii")))
+                .andExpect(jsonPath("$.max[*].followingWin").value(hasItems(2015, 1995)))
+                .andExpect(jsonPath("$.max[*].previousWin").value(hasItems(2002, 1982)))
+                .andExpect(jsonPath("$.max[*].interval").value(hasItems(13, 13)));
     }
 
 }
