@@ -18,7 +18,7 @@ interface FilmRepository extends JpaRepository<Film, Long> {
         "WHERE T.qtd = :#{#val}"
         , nativeQuery = true
     )
-    List<IReportByProducer> findWinnerProducersWithNativeQuery(@Param("val") int value);
+    List<IReportByProducer> findWinnerProducersWithNativeQuery(@Param("val") Long value);
 
     @Query(value =
         "SELECT MAX(qtd) maxInterval FROM (\n" + //
@@ -28,7 +28,7 @@ interface FilmRepository extends JpaRepository<Film, Long> {
         "    WHERE f.winner = true\n" + //
         "    GROUP BY fp.producer) T\n" + //
         "WHERE T.qtd > 0", nativeQuery = true)
-    int findMaxProducerWinnerInterval();
+    Long findMaxProducerWinnerInterval();
 
     @Query(value =
     "SELECT MIN(qtd) maxInterval FROM (\n" + //
@@ -38,5 +38,5 @@ interface FilmRepository extends JpaRepository<Film, Long> {
     "    WHERE f.winner = true\n" + //
     "    GROUP BY fp.producer) T\n" + //
     "WHERE T.qtd > 0", nativeQuery = true)
-    int findMinProducerWinnerInterval();
+    Long findMinProducerWinnerInterval();
 }

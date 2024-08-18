@@ -12,12 +12,18 @@ public class FilmService {
     private FilmRepository repository;
 
     public List<IReportByProducer> getMaxWinnersProducers() {
-        int max =  repository.findMaxProducerWinnerInterval();
+        Long max =  repository.findMaxProducerWinnerInterval();
+        if(max == null) {
+            return List.of();
+        }
         return repository.findWinnerProducersWithNativeQuery(max);
     }
 
     public List<IReportByProducer> getMinWinnersProducers() {
-        int min =  repository.findMinProducerWinnerInterval();
+        Long min =  repository.findMinProducerWinnerInterval();
+        if(min == null) {
+            return List.of();
+        }
         return repository.findWinnerProducersWithNativeQuery(min);
     }
 
